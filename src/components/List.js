@@ -28,7 +28,8 @@ export default function List() {
                   className="collection-item left-align red lighten-3"
                 >
                   <a
-                    style={{ padding: "0.5em"}}
+                    href={<Post />}
+                    style={{ marginBottom: "10px" }}
                     onClick={() => setActive("titleClicked")}
                   >
                     Title : {post.title}

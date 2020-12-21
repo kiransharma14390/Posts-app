@@ -7,12 +7,19 @@ import { ReactSearchAutocomplete } from "react-search-autocomplete";
 
 export default function App() {
   const [active, setActive] = useState("firstComponent");
-  const [searchActive, setSearchActive, users, setUsers] = useState(null);
+  const [
+    searchActive,
+    setSearchActive,
+    users,
+    setUsers,
+    searchedName,
+    setsearchedName
+  ] = useState(null);
 
   fetch(`https://jsonplaceholder.typicode.com/users`)
     .then(response => response.json())
     .then(user => {
-      setUsers(user.name);
+      setUsers(user);
     });
   return (
     <div>
@@ -30,7 +37,7 @@ export default function App() {
         <nav className="nav">
           <div style={{ width: 400 }}>
             <ReactSearchAutocomplete
-              items={users}
+              items={users != null ? users : ""}
               onSearch={handleOnSearch}
               onSelect={handleOnSelect}
               onFocus={handleOnFocus}
@@ -52,7 +59,7 @@ export default function App() {
       {active === "firstComponent" && <List />}
       {active === "secondComponent" && <Post />}
       {active === "thirdComponent" && <User />}
-      {}
+      {active === "searchComponent" && <User searchedName={searchedName} />}
     </div>
   );
 }
