@@ -15,11 +15,6 @@ export default function List() {
     .then(data => {
       setPosts(data);
     });
-  fetch(`https://jsonplaceholder.typicode.com/users`)
-    .then(response => response.json())
-    .then(data => {
-      setUsers(data);
-    });
 
   return (
     <div className="container">
@@ -32,7 +27,10 @@ export default function List() {
                   key={post.id}
                   className="collection-item left-align red lighten-3"
                 >
-                  <a onClick={() => setActive("titleClicked")}>
+                  <a
+                    style={{ padding: "0.5em"}}
+                    onClick={() => setActive("titleClicked")}
+                  >
                     Title : {post.title}
                   </a>
 
