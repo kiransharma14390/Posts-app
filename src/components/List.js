@@ -7,8 +7,8 @@ import Button from "react-bootstrap";
 
 export default function List() {
   const [active, setActive] = useState("firstComponent");
-  const [posts, setPosts] = useState(null);
-  const [users, setUsers] = useState(null);
+  const [posts, setPosts] = useState();
+  const [users, setUsers] = useState();
 
   const fetchData = fetch(`https://jsonplaceholder.typicode.com/posts`)
     .then(response => response.json())
@@ -28,14 +28,13 @@ export default function List() {
                   className="collection-item left-align red lighten-3"
                 >
                   <a
-                    href={<Post />}
                     style={{ marginBottom: "10px" }}
                     onClick={() => setActive("titleClicked")}
                   >
                     Title : {post.title}
                   </a>
 
-                  {active === "titleClicked" && <Post userId={1} post={post} />}
+                  {active === "titleClicked" && <Post userId={post.userId} post={post} />}
                   <div>
                     <button onClick={() => setActive("userIdClicked")}>
                       <p> Created By : {post.userId}</p>

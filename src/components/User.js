@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../App.css";
 
-export default function User(userId) {
+export default function User({userId}) {
   const [user, setUser] = useState(null);
 
   fetch(`https://jsonplaceholder.typicode.com/users/` + userId)

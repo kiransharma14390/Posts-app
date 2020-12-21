@@ -4,22 +4,22 @@ import { Switch, Route, BrowserRouter as Router, Link } from "react-router-dom";
 import User from "./User";
 import Button from "react-bootstrap";
 
-export default function Post(userId, post) {
-  const [users, setUsers] = useState(null);
-  const [comments, setComments] = useState(null);
+export default function Post({userId, post}) {
+  const [users, setUsers] = useState();
+  const [comments, setComments] = useState();
 
   var username;
 
-  fetch(`https://jsonplaceholder.typicode.com/comments?postId=` + 1)
+  fetch(`https://jsonplaceholder.typicode.com/comments?postId=` + post.postId)
     .then(response => response.json())
     .then(data => {
-      setComments(data);
+      setComments(data)
     });
-  fetch(`https://jsonplaceholder.typicode.com/users/` + 1)
+  fetch(`https://jsonplaceholder.typicode.com/users/` + userId)
     .then(response => response.json())
     .then(data => {
       setUsers(data);
-      username = users.username;
+      username = data.username;
     });
 
   return (
@@ -28,7 +28,7 @@ export default function Post(userId, post) {
         <ul className="collection">
           {
             <div>
-              <li> Post : {post.title}</li>
+              <li> Post : {post ? post.title:''}</li>
               <li> Username : {username}</li>
               <h2>Post Comments</h2>
 
@@ -37,15 +37,11 @@ export default function Post(userId, post) {
                   .filter(comment => comment.postId === post.postId)
                   .map(comment => (
                     <div>
-                      <div
-                        key={comment.id}
-                        className="collection-item left-align red lighten-3"
-                      >
                         <li> Subject of Comment : {comment.name}</li>
                         <li> Body : {comment.body}</li>
                         <li> Email : {comment.email}</li>
                       </div>
-                    </div>
+                    
                   ))}
             </div>
           }

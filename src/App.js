@@ -12,15 +12,24 @@ export default function App() {
     setSearchActive,
     users,
     setUsers,
+    usernames,
+    setUsernames,
     searchedName,
     setsearchedName
-  ] = useState(null);
+  ] = useState();
 
   fetch(`https://jsonplaceholder.typicode.com/users`)
     .then(response => response.json())
-    .then(user => {
-      setUsers(user);
+    .then(data => {
+      setUsers(data);
+
     });
+    const u=()=>{
+        users.map(user=>(
+        usernames=user.name,
+        setUsernames(usernames)))
+        console.log(userames)
+    }
   return (
     <div>
       <div className="App">
@@ -35,9 +44,10 @@ export default function App() {
           <p>Welcome To Posts Dashboard</p>
         </header>
         <nav className="nav">
+        {u}
           <div style={{ width: 400 }}>
             <ReactSearchAutocomplete
-              items={users != null ? users : ""}
+              items={usernames != null ? usernames : ""}
               onSearch={handleOnSearch}
               onSelect={handleOnSelect}
               onFocus={handleOnFocus}
