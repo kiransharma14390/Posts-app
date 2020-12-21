@@ -7,8 +7,13 @@ import { ReactSearchAutocomplete } from "react-search-autocomplete";
 
 export default function App() {
   const [active, setActive] = useState("firstComponent");
-  const [searchActive, setSearchActive] = useState(null);
+  const [searchActive, setSearchActive, users, setUsers] = useState(null);
 
+  fetch(`https://jsonplaceholder.typicode.com/users`)
+    .then(response => response.json())
+    .then(user => {
+      setUsers(user.name);
+    });
   return (
     <div>
       <div className="App">
@@ -17,7 +22,7 @@ export default function App() {
           style={{
             backgroundColor: "skyblue",
             padding: "15px",
-            fontSize: "20px"
+            fontSize: "30px"
           }}
         >
           <p>Welcome To Posts Dashboard</p>
@@ -25,7 +30,7 @@ export default function App() {
         <nav className="nav">
           <div style={{ width: 400 }}>
             <ReactSearchAutocomplete
-              items={items}
+              items={users}
               onSearch={handleOnSearch}
               onSelect={handleOnSelect}
               onFocus={handleOnFocus}
@@ -60,25 +65,3 @@ const handleOnFocus = () => {
   console.log("Focused");
 };
 const handleOnSearch = () => {};
-const items = [
-  {
-    id: 0,
-    name: "Cobol"
-  },
-  {
-    id: 1,
-    name: "JavaScript"
-  },
-  {
-    id: 2,
-    name: "Basic"
-  },
-  {
-    id: 3,
-    name: "PHP"
-  },
-  {
-    id: 4,
-    name: "Java"
-  }
-];

@@ -37,15 +37,11 @@ export default function List() {
                   </a>
 
                   {active === "titleClicked" && <Post userId={1} post={post} />}
-
                   <div>
                     <button onClick={() => setActive("userIdClicked")}>
-                      {users &&
-                        users
-                          .filter(user => user.userId === post.userId)
-                          .map(user => <p>Created By : {user.name}</p>)}
+                      <p> Created By : {post.userId}</p>
                       {active === "userIdClicked" && (
-                        <User userId={user.userId} />
+                        <User userId={post.userId} />
                       )}
                     </button>
                   </div>
